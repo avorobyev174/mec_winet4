@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AddressActivityTheme">
         <activity
-            android:name=".classes.api.house.HousesActivity"
+            android:name=".classes.house.HousesActivity"
             android:theme="@style/AddressActivityTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

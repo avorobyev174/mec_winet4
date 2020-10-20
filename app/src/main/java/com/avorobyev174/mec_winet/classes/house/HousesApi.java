@@ -1,7 +1,7 @@
 package com.avorobyev174.mec_winet.classes.house;
 
-import com.avorobyev174.mec_winet.classes.api.house.ResponseCreateHouse;
-import com.avorobyev174.mec_winet.classes.api.house.ResponseHouseInfo;
+import com.avorobyev174.mec_winet.classes.api.SimpleResponse;
+import com.avorobyev174.mec_winet.classes.api.SimpleResponseWithParams;
 
 import retrofit2.http.POST;
 import retrofit2.http.GET;
@@ -11,12 +11,15 @@ import retrofit2.http.Query;
 
 public interface HousesApi {
     @GET("house/?485kf9056kjwj3=04jf75h@hjfks")
-    Call<ResponseHouseInfo> getHouse();
+    Call<HousesInfoResponse> getHouses();
 
     @POST("house/?485kf9056kjwj3=04jf75h@hjfks")
-    Call<ResponseCreateHouse> createHouse(@Query("street") String street,
-                                          @Query("house_number") String houseNumber);
+    Call<SimpleResponseWithParams> createHouse(@Query("street") String street,
+                                               @Query("house_number") String houseNumber);
 
-    @DELETE("house/5?485kf9056kjwj3=04jf75h@hjfks")
-    Call<ResponseHouseInfo> deleteHouse();
+    @DELETE("mobile_redirect.php?485kf9056kjwj3=04jf75h@hjfks")
+    Call<SimpleResponse> deleteHouse(@Query("_type") String entity, @Query("_id") int houseId);
+
+    @GET("house/?485kf9056kjwj3=04jf75h@hjfks")
+    Call<HousesInfoResponse> getHouse(@Query("house_id") int houseId);
 }

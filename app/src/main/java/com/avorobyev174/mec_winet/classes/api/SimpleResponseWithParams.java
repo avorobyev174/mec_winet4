@@ -1,10 +1,10 @@
-package com.avorobyev174.mec_winet.classes.api.house;
-import java.util.List;
+package com.avorobyev174.mec_winet.classes.api;
 
+import com.avorobyev174.mec_winet.classes.house.HouseParams;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class ResponseHouseInfo {
+public class SimpleResponseWithParams {
 
     @SerializedName("success")
     @Expose
@@ -12,11 +12,24 @@ public class ResponseHouseInfo {
 
     @SerializedName("result")
     @Expose
-    private List<HouseInfo> houseInfo = null;
+    private String result = null;
 
     @SerializedName("sql")
     @Expose
     private String sql;
+
+
+    @SerializedName("params")
+    @Expose
+    private HouseParams params;
+
+    public HouseParams getParams() {
+        return params;
+    }
+
+    public void setParams(HouseParams params) {
+        this.params = params;
+    }
 
     public Boolean getSuccess() {
         return success;
@@ -26,12 +39,12 @@ public class ResponseHouseInfo {
         this.success = success;
     }
 
-    public List<HouseInfo> getResult() {
-        return houseInfo;
+    public String getResult() {
+        return result;
     }
 
-    public void setHouseInfo(List<HouseInfo> houseInfo) {
-        this.houseInfo = houseInfo;
+    public void setResult(String result) {
+        this.result = result;
     }
 
     public String getSql() {
