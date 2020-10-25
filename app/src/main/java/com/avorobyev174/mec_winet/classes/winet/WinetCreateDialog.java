@@ -1,4 +1,4 @@
-package com.avorobyev174.mec_winet.classes.vestibule;
+package com.avorobyev174.mec_winet.classes.winet;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -15,6 +15,10 @@ import androidx.annotation.NonNull;
 import com.avorobyev174.mec_winet.R;
 import com.avorobyev174.mec_winet.classes.api.ApiClient;
 import com.avorobyev174.mec_winet.classes.floor.Floor;
+import com.avorobyev174.mec_winet.classes.vestibule.Vestibule;
+import com.avorobyev174.mec_winet.classes.vestibule.VestibuleAdapter;
+import com.avorobyev174.mec_winet.classes.vestibule.VestibuleParams;
+import com.avorobyev174.mec_winet.classes.vestibule.VestibuleResponseWithParams;
 
 import java.util.List;
 
@@ -22,15 +26,15 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class VestibuleCreateDialog extends Dialog {
+public class WinetCreateDialog extends Dialog {
     public Activity activity;
-    public Button confirmCreateFloorButton, cancelCreateFloorButton;
-    public EditText vestibuleNumber;
+    public Button confirmCreateWinetButton, cancelCreateWinetButton;
+    public EditText  editText;
     private VestibuleAdapter vestibuleAdapter;
     private List<Vestibule> vestibuleList;
     private Floor floor;
 
-    public VestibuleCreateDialog(@NonNull Activity activity, VestibuleAdapter vestibuleAdapter, List<Vestibule> vestibuleList, Floor floor) {
+    public WinetCreateDialog(@NonNull Activity activity, VestibuleAdapter vestibuleAdapter, List<Vestibule> vestibuleList, Floor floor) {
         super(activity);
         this.activity = activity;
         this.vestibuleAdapter = vestibuleAdapter;
@@ -45,23 +49,22 @@ public class VestibuleCreateDialog extends Dialog {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.create_dialog_activity);
 
-        confirmCreateFloorButton = findViewById(R.id.confirmCreateButton);
-        cancelCreateFloorButton = findViewById(R.id.cancelCreateButton);
+        confirmCreateWinetButton = findViewById(R.id.confirmCreateButton);
+        cancelCreateWinetButton = findViewById(R.id.cancelCreateFloorButton);
 
-        vestibuleNumber = findViewById(R.id.objectNumber);
-        vestibuleNumber.setHint("Номер тамбура");
+        editText  = findViewById(R.id.objectNumber);
 
-        cancelCreateFloorButton.setOnClickListener(new View.OnClickListener() {
+        cancelCreateWinetButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dismiss();
             }
         });
 
-        confirmCreateFloorButton.setOnClickListener(new View.OnClickListener() {
+        confirmCreateWinetButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String vestNumber = vestibuleNumber.getText().toString();
+                String vestNumber =  editText.getText().toString();
                 for (Vestibule vestibule : vestibuleList) {
                     if (Integer.parseInt(vestNumber) == vestibule.getNumber()) {
                         Toast.makeText(getContext(), "Тамбур \"" + vestNumber + "\" уже существует на этом этаже", Toast.LENGTH_SHORT).show();

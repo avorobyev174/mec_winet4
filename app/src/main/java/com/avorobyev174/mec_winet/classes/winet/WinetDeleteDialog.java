@@ -1,4 +1,4 @@
-package com.avorobyev174.mec_winet.classes.vestibule;
+package com.avorobyev174.mec_winet.classes.winet;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -15,8 +15,8 @@ import androidx.annotation.NonNull;
 import com.avorobyev174.mec_winet.R;
 import com.avorobyev174.mec_winet.classes.api.ApiClient;
 import com.avorobyev174.mec_winet.classes.api.SimpleResponse;
-import com.avorobyev174.mec_winet.classes.floor.Floor;
-import com.avorobyev174.mec_winet.classes.floor.FloorAdapter;
+import com.avorobyev174.mec_winet.classes.vestibule.Vestibule;
+import com.avorobyev174.mec_winet.classes.vestibule.VestibuleAdapter;
 
 import java.util.List;
 
@@ -24,7 +24,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class VestibuleDeleteDialog extends Dialog {
+public class WinetDeleteDialog extends Dialog {
     public Activity activity;
     public Button confirmDeleteVestibuleButton, cancelDeleteVestibuleButton;
     public TextView vestibuleDeleteTitle;
@@ -32,7 +32,7 @@ public class VestibuleDeleteDialog extends Dialog {
     private VestibuleAdapter vestibuleAdapter;
     private List<Vestibule> vestibuleList;
 
-    public VestibuleDeleteDialog(@NonNull Activity activity, Vestibule vestibule, VestibuleAdapter vestibuleAdapter, List<Vestibule> vestibuleList) {
+    public WinetDeleteDialog(@NonNull Activity activity, Vestibule vestibule, VestibuleAdapter vestibuleAdapter, List<Vestibule> vestibuleList) {
         super(activity);
         this.activity = activity;
         this.vestibule = vestibule;
@@ -51,7 +51,7 @@ public class VestibuleDeleteDialog extends Dialog {
         cancelDeleteVestibuleButton = findViewById(R.id.cancelDeleteDialogButton);
 
         vestibuleDeleteTitle = findViewById(R.id.deleteDialogTitle);
-        vestibuleDeleteTitle.setText("Вы хотите удалить табмур \"" + vestibule.getNumber() + "\" ?");
+        vestibuleDeleteTitle.setText("Вы хотите удалить этаж \"" + vestibule.getNumber() + "\" ?");
 
         cancelDeleteVestibuleButton.setOnClickListener(new View.OnClickListener() {
             @Override
