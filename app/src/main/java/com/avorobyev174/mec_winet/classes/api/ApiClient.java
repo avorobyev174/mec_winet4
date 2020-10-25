@@ -1,6 +1,8 @@
 package com.avorobyev174.mec_winet.classes.api;
 
+import com.avorobyev174.mec_winet.classes.floor.FloorApi;
 import com.avorobyev174.mec_winet.classes.house.HousesApi;
+import com.avorobyev174.mec_winet.classes.section.SectionApi;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -28,5 +30,15 @@ public class ApiClient {
     public static HousesApi getHouseApi() {
         HousesApi housesApi = getRetrofit().create(HousesApi.class);
         return housesApi;
+    }
+
+    public static SectionApi getSectionApi() {
+        SectionApi sectionApi = getRetrofit().create(SectionApi.class);
+        return sectionApi;
+    }
+
+    public static FloorApi getFloorApi() {
+        FloorApi floorApi = getRetrofit().create(FloorApi.class);
+        return floorApi;
     }
 }

@@ -14,7 +14,7 @@ import androidx.annotation.NonNull;
 
 import com.avorobyev174.mec_winet.R;
 import com.avorobyev174.mec_winet.classes.api.ApiClient;
-import com.avorobyev174.mec_winet.classes.api.SimpleResponseWithParams;
+import com.avorobyev174.mec_winet.classes.section.Section;
 
 import java.util.List;
 
@@ -44,7 +44,7 @@ public class HouseCreateDialog extends Dialog {
         setContentView(R.layout.house_create_dialog_activity);
 
         createHouseButton = findViewById(R.id.createHouseButton);
-        cancelCreateHouseButton = (Button) findViewById(R.id.cancelCreateHouseButton);
+        cancelCreateHouseButton = findViewById(R.id.cancelCreateHouseButton);
 
         street = findViewById(R.id.street);
         streetNumber = findViewById(R.id.streetNumber);
@@ -59,11 +59,19 @@ public class HouseCreateDialog extends Dialog {
         createHouseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Call<SimpleResponseWithParams> createHouseCall = ApiClient.getHouseApi().createHouse(street.getText().toString(), streetNumber.getText().toString());
+                String houseFullName = street.getText().toString() + " " + streetNumber.getText().toString();
+                for (House house : houseList) {
+                    if (houseFullName.equals(house.getFullStreetName())) {
+                        Toast.makeText(getContext(), "Дом \"" + houseFullName + "\" уже существует в списке", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                }
 
-                createHouseCall.enqueue(new Callback<SimpleResponseWithParams>() {
+                Call<HouseResponseWithParams> createHouseCall = ApiClient.getHouseApi().createHouse(street.getText().toString(), streetNumber.getText().toString());
+
+                createHouseCall.enqueue(new Callback<HouseResponseWithParams>() {
                     @Override
-                    public void onResponse(Call<SimpleResponseWithParams> call, Response<SimpleResponseWithParams> response) {
+                    public void onResponse(Call<HouseResponseWithParams> call, Response<HouseResponseWithParams> response) {
 
                         Log.e("response", "success = " + response.body().getSuccess());
                         int houseId = Integer.valueOf(response.body().getResult());
@@ -78,7 +86,7 @@ public class HouseCreateDialog extends Dialog {
                     }
 
                     @Override
-                    public void onFailure(Call<SimpleResponseWithParams> call, Throwable t) {
+                    public void onFailure(Call<HouseResponseWithParams> call, Throwable t) {
                         Log.e("response", "failure " + t);
                     }
                 });

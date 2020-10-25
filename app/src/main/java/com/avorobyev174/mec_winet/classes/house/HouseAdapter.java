@@ -18,23 +18,20 @@ import androidx.annotation.Nullable;
 
 import com.avorobyev174.mec_winet.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class HouseAdapter extends ArrayAdapter<House> {
     private LayoutInflater inflater;
-    private List<House> houseList = new ArrayList<>();
+    private List<House> houseList;
     private Context context;
-    private Activity activity;
     private HouseAdapter houseAdapter;
 
 
-    public HouseAdapter(@NonNull Context context, int resource, List<House> houseList, LayoutInflater inflater, Activity activity) {
+    public HouseAdapter(@NonNull Context context, int resource, List<House> houseList, LayoutInflater inflater) {
         super(context, resource, houseList);
         this.inflater = inflater;
         this.houseList = houseList;
         this.context = context;
-        this.activity = activity;
         this.houseAdapter = this;
     }
 
@@ -45,28 +42,27 @@ public class HouseAdapter extends ArrayAdapter<House> {
         House house = houseList.get(position);
         convertView = inflater.inflate(R.layout.house_list_item_view, null, false);
 
-        final ViewHolder viewHolder = new ViewHolder(convertView, house, houseAdapter);
+        final ViewHolder viewHolder = new ViewHolder(convertView, house);
         convertView.setTag(viewHolder);
 
         return convertView;
     }
 
     private class ViewHolder {
-        public TextView textView;
-        public ImageButton deleteButton;
+        public TextView houseTitle;
+        public ImageButton deleteHouseButton;
         private House house;
-        private HouseAdapter houseAdapter;
+        //private HouseAdapter houseAdapter;
 
-        private ViewHolder(View rootView, House house, HouseAdapter houseAdapter) {
-            this.houseAdapter = houseAdapter;
+        private ViewHolder(View rootView, House house) {
             this.house = house;
 
-            textView = rootView.findViewById(R.id.houses_list_item_text);
-            deleteButton = rootView.findViewById(R.id.deleteButton);
+            houseTitle = rootView.findViewById(R.id.houses_list_item_text);
+            deleteHouseButton = rootView.findViewById(R.id.deleteHouseButton);
 
-            textView.setText(house.getFullStreetName());
+            houseTitle.setText(house.getFullStreetName());
 
-            deleteButton.setOnTouchListener(new View.OnTouchListener() {
+            deleteHouseButton.setOnTouchListener(new View.OnTouchListener() {
                 @Override
                 public boolean onTouch(View view, MotionEvent motionEvent) {
                     if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
@@ -82,7 +78,7 @@ public class HouseAdapter extends ArrayAdapter<House> {
                 }
             });
 
-            deleteButton.setOnClickListener(new View.OnClickListener() {
+            deleteHouseButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     deleteHouse(view);
@@ -91,7 +87,7 @@ public class HouseAdapter extends ArrayAdapter<House> {
         }
 
         private void deleteHouse(View view) {
-            HouseDeleteDialog houseDeleteDialog = new HouseDeleteDialog(activity, house, houseAdapter, houseList);
+            HouseDeleteDialog houseDeleteDialog = new HouseDeleteDialog((Activity) context, house, houseAdapter, houseList);
             houseDeleteDialog.show();
         }
     }

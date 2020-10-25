@@ -42,7 +42,7 @@ public class VestibuleActivity extends AppCompatActivity {
         Floor floor = (Floor) arguments.getSerializable(Floor.class.getSimpleName());
         this.floor = floor;
         this.section = floor.getSection();
-        this.house = floor.getHouse();
+        this.house = section.getHouse();
         infoBar.setText(house.getFullStreetName() + " → " + section.getShortNumber() + " → " + floor.getShortNumber());
 
         vestList = new ArrayList<>();

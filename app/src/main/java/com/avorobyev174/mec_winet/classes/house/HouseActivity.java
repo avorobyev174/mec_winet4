@@ -9,8 +9,6 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -19,9 +17,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.avorobyev174.mec_winet.R;
-import com.avorobyev174.mec_winet.SectionActivity;
+import com.avorobyev174.mec_winet.classes.section.SectionActivity;
 import com.avorobyev174.mec_winet.classes.api.ApiClient;
-import com.avorobyev174.mec_winet.classes.api.SimpleResponseWithParams;
 
 
 import java.util.ArrayList;
@@ -33,7 +30,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class HousesActivity extends AppCompatActivity {
+public class HouseActivity extends AppCompatActivity {
     private ListView housesListView;
     private HouseAdapter adapter;
     private List<House> houseList;
@@ -52,14 +49,14 @@ public class HousesActivity extends AppCompatActivity {
 
     private void init() {
         houseList = new ArrayList<>();
-        createHouseButton = findViewById(R.id.createHouseButtonInfoBar);
+        createHouseButton = findViewById(R.id.createButtonInfoBar);
         housesListView = findViewById(R.id.houses_list_view);
         infoBar = findViewById(R.id.info_bar);
-        progressBar  = (ProgressBar)findViewById(R.id.progressBar);
+        progressBar  = findViewById(R.id.progressBar);
 
         infoBar.setText(R.string.houses_list);
 
-        adapter = new HouseAdapter(getApplicationContext(), R.layout.house_list_item_view, houseList, getLayoutInflater(), this);
+        adapter = new HouseAdapter(this, R.layout.house_list_item_view, houseList, getLayoutInflater());
         housesListView.setAdapter(adapter);
 
         initOnClick();
@@ -71,7 +68,7 @@ public class HousesActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 House house = houseList.get(i);
-                Intent intent = new Intent(HousesActivity.this, SectionActivity.class);
+                Intent intent = new Intent(HouseActivity.this, SectionActivity.class);
                 intent.putExtra(House.class.getSimpleName(), house);
                 startActivity(intent);
             }
@@ -108,7 +105,7 @@ public class HousesActivity extends AppCompatActivity {
         messages.enqueue(new Callback<HousesInfoResponse>() {
             @Override
             public void onResponse(Call<HousesInfoResponse> call, Response<HousesInfoResponse> response) {
-                Log.e("response", "success = " + response.body().getSuccess());
+                Log.e("get house response", "success = " + response.body().getSuccess());
 
                 for (HouseInfo houseInfo : response.body().getResult()) {
                     houseList.add(new House(houseInfo.getId(), houseInfo.getStreet(), houseInfo.getHouseNumber()));

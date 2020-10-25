@@ -6,8 +6,8 @@ import com.avorobyev174.mec_winet.classes.section.Section;
 import java.io.Serializable;
 
 public class Floor implements Serializable {
+    private int id;
     private int number;
-    private House house;
 
     public Section getSection() {
         return section;
@@ -27,13 +27,13 @@ public class Floor implements Serializable {
         return "Э" + getNumber();
     }
 
-    public House getHouse() {
-        return house;
+    public int getId() {
+        return id;
     }
 
-    public Floor(int number, House house, Section section) {
+    public Floor(int id, int number, Section section) {
+        this.id = id;
         this.number = number;
-        this.house = house;
         this.section = section;
     }
 

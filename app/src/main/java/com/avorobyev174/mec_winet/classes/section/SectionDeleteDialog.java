@@ -1,4 +1,4 @@
-package com.avorobyev174.mec_winet.classes.house;
+package com.avorobyev174.mec_winet.classes.section;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -22,20 +22,20 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class HouseDeleteDialog extends Dialog {
+public class SectionDeleteDialog extends Dialog {
     public Activity activity;
-    public Button deleteHouseButton, cancelDeleteHouseButton;
+    public Button deleteSectionButton, cancelDeleteSectionButton;
     public TextView title;
-    private House house;
-    private HouseAdapter houseAdapter;
-    private List<House> houseList;
+    private Section section;
+    private SectionAdapter sectionAdapter;
+    private List<Section> sectionList;
 
-    public HouseDeleteDialog(@NonNull Activity activity, House house, HouseAdapter houseAdapter, List<House> houseList) {
+    public SectionDeleteDialog(@NonNull Activity activity, Section section, SectionAdapter sectionAdapter, List<Section> sectionList) {
         super(activity);
         this.activity = activity;
-        this.house = house;
-        this.houseAdapter = houseAdapter;
-        this.houseList = houseList;
+        this.section = section;
+        this.sectionAdapter = sectionAdapter;
+        this.sectionList = sectionList;
     }
 
     @Override
@@ -43,26 +43,26 @@ public class HouseDeleteDialog extends Dialog {
         super.onCreate(savedInstanceState);
 
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.house_delete_dialog_activity);
+        setContentView(R.layout.section_delete_dialog_activity);
 
-        deleteHouseButton = findViewById(R.id.deleteHouseDialogButton);
-        cancelDeleteHouseButton = findViewById(R.id.cancelDeleteHouseDialogButton);
+        deleteSectionButton = findViewById(R.id.deleteSectionDialogButton);
+        cancelDeleteSectionButton = findViewById(R.id.cancelDeleteSectionDialogButton);
 
-        title = findViewById(R.id.deleteHouseTitle);
-        title.setText("Вы хотите удалить дом \"" + house.getFullStreetName() + "\" ?");
+        title = findViewById(R.id.deleteSectionTitle);
+        title.setText("Вы хотите удалить подьезд \"" + section.getNumber() + "\" ?");
 
-        cancelDeleteHouseButton.setOnClickListener(new View.OnClickListener() {
+        cancelDeleteSectionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dismiss();
             }
         });
 
-        deleteHouseButton.setOnClickListener(new View.OnClickListener() {
+        deleteSectionButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
-                Call<SimpleResponse> responseCall = ApiClient.getHouseApi().deleteHouse("house", house.getId());
+                Call<SimpleResponse> responseCall = ApiClient.getSectionApi().deleteSection("section", section.getId());
 
                 responseCall.enqueue(new Callback<SimpleResponse>() {
                     @Override
@@ -71,9 +71,9 @@ public class HouseDeleteDialog extends Dialog {
                         Log.e("delete", "sql " + response.body().getSql());
                         Log.e("delete", "result " + response.body().getSuccess());
 
-                        houseList.remove(house);
-                        Toast.makeText(getContext(), "Дом \"" + house.getFullStreetName() + "\" удален из списока", Toast.LENGTH_SHORT).show();
-                        houseAdapter.notifyDataSetChanged();
+                        sectionList.remove(section);
+                        Toast.makeText(getContext(), "Подьезд \"" + section.getNumber() + "\" удален из списока", Toast.LENGTH_SHORT).show();
+                        sectionAdapter.notifyDataSetChanged();
                         dismiss();
                     }
 

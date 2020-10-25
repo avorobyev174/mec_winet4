@@ -25,7 +25,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
-        android:id="@+id/createHouseButtonInfoBar"
+        android:id="@+id/createButtonInfoBar"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginRight="10dp"

@@ -1,10 +1,10 @@
-package com.avorobyev174.mec_winet.classes.api;
+package com.avorobyev174.mec_winet.classes.section;
 
 import com.avorobyev174.mec_winet.classes.house.HouseParams;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class SimpleResponseWithParams {
+public class SectionResponseWithParams {
 
     @SerializedName("success")
     @Expose
@@ -21,13 +21,13 @@ public class SimpleResponseWithParams {
 
     @SerializedName("params")
     @Expose
-    private HouseParams params;
+    private SectionParams params;
 
-    public HouseParams getParams() {
+    public SectionParams getParams() {
         return params;
     }
 
-    public void setParams(HouseParams params) {
+    public void setParams(SectionParams params) {
         this.params = params;
     }
 

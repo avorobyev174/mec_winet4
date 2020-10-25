@@ -12,15 +12,15 @@
         android:supportsRtl="true"
         android:theme="@style/AddressActivityTheme">
         <activity
-            android:name=".classes.house.HousesActivity"
+            android:name=".classes.house.HouseActivity"
             android:theme="@style/AddressActivityTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SectionActivity" />
-        <activity android:name=".FloorActivity" />
+        <activity android:name=".classes.section.SectionActivity" />
+        <activity android:name=".classes.floor.FloorActivity" />
         <activity android:name=".VestibuleActivity" />
         <activity android:name=".WinetActivity" />
         <activity android:name=".WinetInfoActivity" />
