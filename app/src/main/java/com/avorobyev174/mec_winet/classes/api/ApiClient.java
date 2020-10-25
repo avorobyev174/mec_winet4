@@ -3,6 +3,7 @@ package com.avorobyev174.mec_winet.classes.api;
 import com.avorobyev174.mec_winet.classes.floor.FloorApi;
 import com.avorobyev174.mec_winet.classes.house.HousesApi;
 import com.avorobyev174.mec_winet.classes.section.SectionApi;
+import com.avorobyev174.mec_winet.classes.vestibule.VestibuleApi;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -40,5 +41,10 @@ public class ApiClient {
     public static FloorApi getFloorApi() {
         FloorApi floorApi = getRetrofit().create(FloorApi.class);
         return floorApi;
+    }
+
+    public static VestibuleApi getVestibuleApi() {
+        VestibuleApi vestibuleApi = getRetrofit().create(VestibuleApi.class);
+        return vestibuleApi;
     }
 }

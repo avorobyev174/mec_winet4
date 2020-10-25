@@ -72,7 +72,7 @@ public class HouseDeleteDialog extends Dialog {
                         Log.e("delete", "result " + response.body().getSuccess());
 
                         houseList.remove(house);
-                        Toast.makeText(getContext(), "Дом \"" + house.getFullStreetName() + "\" удален из списока", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "Дом \"" + house.getFullStreetName() + "\" удален из списка", Toast.LENGTH_SHORT).show();
                         houseAdapter.notifyDataSetChanged();
                         dismiss();
                     }

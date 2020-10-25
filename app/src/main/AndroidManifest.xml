@@ -21,8 +21,8 @@
         </activity>
         <activity android:name=".classes.section.SectionActivity" />
         <activity android:name=".classes.floor.FloorActivity" />
-        <activity android:name=".VestibuleActivity" />
-        <activity android:name=".WinetActivity" />
+        <activity android:name=".classes.vestibule.VestibuleActivity" />
+        <activity android:name=".classes.winet.WinetActivity" />
         <activity android:name=".WinetInfoActivity" />
     </application>
 

@@ -9,8 +9,7 @@ import java.io.Serializable;
 public class Vestibule implements Serializable {
     private int number;
     private Floor floor;
-    private Section section;
-    private House house;
+    private int id;
 
     public Floor getFloor() {
         return floor;
@@ -28,19 +27,14 @@ public class Vestibule implements Serializable {
         return "Т" + getNumber();
     }
 
-    public House getHouse() {
-        return house;
+    public int getId() {
+        return id;
     }
 
-    public Section getSection() {
-        return section;
-    }
-
-    public Vestibule(int number, House house, Section section, Floor floor) {
+    public Vestibule(int id, int number, Floor floor) {
         this.number = number;
-        this.house = house;
-        this.section = section;
         this.floor = floor;
+        this.id = id;
     }
 
 }

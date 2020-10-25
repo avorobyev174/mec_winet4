@@ -74,7 +74,7 @@ public class FloorDeleteDialog extends Dialog {
                         Log.e("delete", "result " + response.body().getSuccess());
 
                         floorList.remove(floor);
-                        Toast.makeText(getContext(), "Этаж \"" + floor.getNumber() + "\" удален из списока", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "Этаж \"" + floor.getNumber() + "\" удален из списка", Toast.LENGTH_SHORT).show();
                         floorAdapter.notifyDataSetChanged();
                         dismiss();
                     }

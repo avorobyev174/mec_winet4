@@ -72,7 +72,7 @@ public class SectionDeleteDialog extends Dialog {
                         Log.e("delete", "result " + response.body().getSuccess());
 
                         sectionList.remove(section);
-                        Toast.makeText(getContext(), "Подьезд \"" + section.getNumber() + "\" удален из списока", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "Подьезд \"" + section.getNumber() + "\" удален из списка", Toast.LENGTH_SHORT).show();
                         sectionAdapter.notifyDataSetChanged();
                         dismiss();
                     }

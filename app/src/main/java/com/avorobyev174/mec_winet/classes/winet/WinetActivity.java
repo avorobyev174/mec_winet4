@@ -1,9 +1,7 @@
-package com.avorobyev174.mec_winet;
+package com.avorobyev174.mec_winet.classes.winet;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Parcelable;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -12,13 +10,12 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.avorobyev174.mec_winet.R;
+import com.avorobyev174.mec_winet.WinetInfoActivity;
 import com.avorobyev174.mec_winet.classes.floor.Floor;
 import com.avorobyev174.mec_winet.classes.house.House;
 import com.avorobyev174.mec_winet.classes.section.Section;
 import com.avorobyev174.mec_winet.classes.vestibule.Vestibule;
-import com.avorobyev174.mec_winet.classes.vestibule.VestibuleAdapter;
-import com.avorobyev174.mec_winet.classes.winet.Winet;
-import com.avorobyev174.mec_winet.classes.winet.WinetAdapter;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -51,8 +48,6 @@ public class WinetActivity extends AppCompatActivity {
         Bundle arguments = getIntent().getExtras();
         this.vestibule = (Vestibule) arguments.getSerializable(Vestibule.class.getSimpleName());
         this.floor = vestibule.getFloor();
-        this.section = vestibule.getSection();
-        this.house = vestibule.getHouse();
         infoBar.setText(house.getFullStreetName() + " → " + section.getShortNumber() + " → " + floor.getShortNumber() + " → " + vestibule.getShortNumber());
         sharedPreferences = getSharedPreferences("winet-storage", MODE_PRIVATE);
 
